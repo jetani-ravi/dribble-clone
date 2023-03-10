@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
-import { Button, Card, Col, Container, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, Col, Container, Row, Tab, Tabs } from 'react-bootstrap';
 import profilecard from '../../../assets/images/profile-card.svg';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import Pagination from 'react-bootstrap/Pagination';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import axios from 'axios';
+import ReactPaginate from 'react-paginate';
+import avtar1 from '../../../assets/images/user1.jpg';
 import { userData } from './responseData';
 
 export function HomePage() {
-  const [totalPage, setTotalPage ] = useState(userData?.total_pages);
-  const [userDataList, setUserDataList] = useState(userData?.data);
+  const [totalPage, setTotalPage ] = useState(0);
+  const [userDataList, setUserDataList] = useState([]);
+  const skills = ['Product designer', 'PROTOTYPER', 'RESEARCHER', 'ARCHITECT'];
+  const portfolio = [
+    'https://reqres.in/img/faces/10-image.jpg',
+    'https://reqres.in/img/faces/10-image.jpg',
+  ];
+  const getUserData = async pageNumber => {
+    try {
+      const data = await axios.get(`https://reqres.in/api/users?page=${pageNumber}`);
+      console.log('data: ', data?.data?.data);
+      setTotalPage(data?.data?.total_pages);
+      setUserDataList(data?.data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handlePageClick = (data) => {
+    getUserData(data+1);
+  }
+  
+  useEffect(()=>{
+    getUserData(1);
+  },[])
   return (
     <>
       <Container fluid>
@@ -23,105 +46,74 @@ export function HomePage() {
               <Tab eventKey="all" title="All">
                 <Row>
                   {
-                    userDataList?.map(val => {
-                      return <>
-                        <Col xs={12} md={3} lg={3}>
-                          <Card className="user-card border-0 ">
-                            <Card.Body className="p-0">
-                              <div className="user-profile">
-                                <div className="profile-img">
-                                  <img src={val?.profile} alt="User" />
+                    userDataList?.length > 0 && userDataList?.map(val => <>
+                      <Col xs={12} md={3} lg={3}>
+                        <Card className="user-card border-0 ">
+                          <Card.Body className="p-0">
+                            <div className="user-profile">
+                              <div className="profile-img">
+                                <img src={avtar1} alt="User" />
+                              </div>
+                              <div className="profile-block">
+                                <h3>Amit Trivedi</h3>
+                                <p className="text-truncate">
+                                  A problem well understood is a problem
+                                  half solved
+                                </p>
+                                <Button
+                                  variant="link"
+                                  className="user-profile-view"
+                                >
+                                  <img
+                                    src={profilecard}
+                                    alt="Profile Card"
+                                    className="me-1" />
+                                  View Profile
+                                </Button>
+                              </div>
+                            </div>
+                            <div className="designation-tag">
+                              {skills?.map(item => (
+                                <div className="tag">
+                                  <span>
+                                    <span>{item}</span>
+                                  </span>
                                 </div>
-                                <div className="profile-block">
-                                  <h3>
-                                    {val?.first_name + ' ' + val?.last_name}
-                                  </h3>
-                                  <p className="text-truncate">
-                                    A problem well understood is a problem half solved
-                                  </p>
-                                  <Button
-                                    variant="link"
-                                    className="user-profile-view"
-                                  >
-                                    <img
-                                      src={profilecard}
-                                      alt="Profile Card"
-                                      className="me-1" />
-                                    View Profile
-                                  </Button>
-                                </div>
-                              </div>
-                              <div className="designation-tag">
-                                {val?.skills?.map(item => (
-                                  <div className="tag">
-                                    <span>
-                                      <span>{item}</span>
-                                    </span>
-                                  </div>
-                                ))}
-                              </div>
-                              <div className="user-project">
-                                <ul>
-                                  <li>
-                                    <img
-                                      src={val?.portfolio[0]}
-                                      alt="Portfolio" />
-                                  </li>
-                                  <li>
-                                    <img
-                                      src={val?.portfolio[0]}
-                                      alt="Portfolio" />
-                                  </li>
-                                </ul>
-                              </div>
-                            </Card.Body>
-                          </Card>
-                        </Col>
-                      </>;
-                    })
+                              ))}
+                            </div>
+                            <div className="user-project">
+                              <ul>
+                                <li>
+                                  <img
+                                    src={portfolio[0]}
+                                    alt="Portfolio" />
+                                </li>
+                                <li>
+                                  <img
+                                    src={portfolio[1]}
+                                    alt="Portfolio" />
+                                </li>
+                              </ul>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    </>)
                   }
                 </Row>
-                <div className="my-pagination">
-                  <Button variant="light">
-                    <FiArrowLeft />
-                    <span>Previous</span>
-                  </Button>
-                  <ul>
-                    <li>
-                      <a href="#link" className="active">
-                        1
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#link">2</a>
-                    </li>
-                    <li>
-                      <a href="#link">3</a>
-                    </li>
-                    <li>
-                      <a href="#link">.</a>
-                    </li>
-                    <li>
-                      <a href="#link">.</a>
-                    </li>
-                    <li>
-                      <a href="#link">.</a>
-                    </li>
-                    <li>
-                      <a href="#link">8</a>
-                    </li>
-                    <li>
-                      <a href="#link">9</a>
-                    </li>
-                    <li>
-                      <a href="#link">10</a>
-                    </li>
-                  </ul>
-                  <Button variant="light">
-                    <span>Next</span>
-                    <FiArrowRight />
-                  </Button>
-                </div>
+                   <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Next"
+                    onPageChange={handlePageClick}
+                    pageRangeDisplayed={3}
+                    pageCount={totalPage}
+                    previousLabel="Previous"
+                    activeClassName="activePage"
+                    containerClassName="paginationContainer"
+                    previousClassName="previousButton"
+                    nextClassName="previousButton"
+                    pageClassName="nextPageButton"
+                  />
               </Tab>
               <Tab eventKey="design" title="Design"></Tab>
               <Tab eventKey="socialmedia" title="Social Media"></Tab>
