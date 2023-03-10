@@ -18,6 +18,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Header } from 'app/components/Header';
 import { Footer } from 'app/components/Footer';
+import { UserDetailsPage } from './pages/UserDetails';
+import { PaidUserPage } from './pages/PaidUser';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -33,6 +35,8 @@ export function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/UserDetails" element={<UserDetailsPage />} />
+        <Route path="/PaidUser" element={<PaidUserPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
