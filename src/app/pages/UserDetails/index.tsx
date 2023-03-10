@@ -70,7 +70,7 @@ export function UserDetailsPage() {
                         <img src={dribbble} alt="" />
                       </li>
                     </ul>
-                  </div>
+                  </div>               
                 </div>
               </Col>
               <Col xs={12} md={8} lg={9}>

@@ -6,6 +6,11 @@ import w3 from '../../../assets/images/w3.jpg';
 import w4 from '../../../assets/images/w4.jpg';
 import w5 from '../../../assets/images/w5.jpg';
 import w6 from '../../../assets/images/w6.jpg';
+import timer1 from '../../../assets/images/timer1.png';
+import Illustrator from '../../../assets/images/Illustrator_icon.png';
+import photoshop from '../../../assets/images/photoshop_icon.png';
+import figma from '../../../assets/images/figma.png';
+import timerstart from '../../../assets/images/timerstart.png';
 import dribbble from '../../../assets/images/dribbble.png';
 import behance from '../../../assets/images/be.png';
 import instagram from '../../../assets/images/instagram.png';
@@ -77,6 +82,110 @@ export function PaidUserPage() {
                       </li>
                     </ul>
                   </div>
+                  <div className="user-hire">
+                    <h3 className="">Hire Me</h3>
+                    <ul>
+                      <li>
+                        <img src={timer1} />
+                        <span className="me-1">Short Term Project</span>
+                      </li>
+                      <li>
+                        <img src={timerstart} />
+                        <span className="me-1">
+                          Long Term Project
+                          <small>Availability: Within the next few weeks</small>
+                        </span>
+                      </li>
+                    </ul>
+                    <Button variant="primary" className="send-offer">
+                      Send Custom Offer
+                    </Button>
+                  </div>
+                  <div className="user-details-more">
+                    <h3>About</h3>
+                    <p>
+                      As a UI/UX designer, I specialize in creating visually
+                      stunning and user-friendly digital experiences. With a
+                      passion for both design and technology, I approach every
+                      project with a user-centered mindset, striving to create
+                      intuitive interfaces and streamlined user flows that
+                      prioritize the needs of the end-users.
+                    </p>
+                    <p>
+                      My skills and expertise extend across a range of design
+                      disciplines, including user research, wireframing,
+                      prototyping, visual design, and design systems. I am
+                      committed to staying up-to-date with the latest design
+                      trends and technologies, ensuring that the digital
+                      products I design are both aesthetically pleasing and
+                      technologically advanced.
+                    </p>
+                    <p>
+                      I believe that great design is not just about creating
+                      beautiful visuals, but about solving problems and
+                      delivering value to users. With that in mind, I am
+                      dedicated to collaborating closely with clients and
+                      stakeholders to understand their unique needs and goals,
+                      and delivering designs that meet or exceed their
+                      expectations.
+                    </p>
+                    <p>
+                      Whether working on a mobile app, website, or other digital
+                      product, I am committed to delivering exceptional results
+                      that help my clients achieve their business objectives and
+                      create memorable user experiences.
+                    </p>
+                  </div>
+                  <div className="user-details-education">
+                    <h3>Education</h3>
+                    <div className="user-degree">
+                      <p>
+                        <strong>Bachelors of Arts</strong>
+                      </p>
+                      <p>University of Education, Lahore</p>
+                      <p>(2016-2022)</p>
+                    </div>
+                    <div className="user-degree">
+                      <p>
+                        <strong>Masters in Brand strategy</strong>
+                      </p>
+                      <p>University of Education, Lahore</p>
+                      <p>(2022)</p>
+                    </div>
+                  </div>
+                  <div className="user-details-education">
+                    <h3>Skills</h3>
+                    <div className="user-skills">
+                      <ul>
+                        <li>
+                          <img src={Illustrator} alt="" />
+                        </li>
+                        <li>
+                          <img src={photoshop} alt="" />
+                        </li>
+                        <li>
+                          <img src={figma} alt="" />
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="user-details-education">
+                    <h3>Certifications</h3>
+                    <div className="user-degree">
+                      <p>
+                        <strong>Ui/Ux Certified</strong>
+                      </p>
+                      <p>Coursera, Ux Design course</p>
+                      <p>April, 2020</p>
+                    </div>
+                    <div className="user-degree">
+                      <p>
+                        <strong>Brand Expert by Coursera</strong>
+                      </p>
+                      <p>Branding and Positioning of the product</p>
+                      <p>June, 2020</p>
+                    </div>
+                  </div>
                 </div>
               </Col>
               <Col xs={12} md={8} lg={9}>
@@ -120,14 +229,14 @@ export function PaidUserPage() {
                     </Row>
                   </Tab>
                   <Tab eventKey="experience" title="Experience">
-                  <Card className="border-0">
+                    <Card className="border-0">
                       <Card.Body>
                         <h1 className="p-5 text-center">Working on it</h1>
                       </Card.Body>
                     </Card>
                   </Tab>
                   <Tab eventKey="education" title="Education">
-                  <Card className="border-0">
+                    <Card className="border-0">
                       <Card.Body>
                         <h1 className="p-5 text-center">Working on it</h1>
                       </Card.Body>
