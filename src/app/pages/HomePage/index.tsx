@@ -9,8 +9,7 @@ import ButtonComponent from 'app/components/Button';
 
 export function HomePage() {
   const [totalPage, setTotalPage] = useState(0);
-  const [userDataList, setUserDataList] = useState([]);
-  const skills = ['Product designer', 'PROTOTYPER', 'RESEARCHER', 'ARCHITECT'];
+  const [userDataList, setUserDataList] = useState<any[]>([]);
   const categories = [
     'All',
     'Design',
@@ -21,19 +20,18 @@ export function HomePage() {
     'Visual Designer',
     'After Effects',
   ];
-  const portfolio = [
-    'https://reqres.in/img/faces/10-image.jpg',
-    'https://reqres.in/img/faces/10-image.jpg',
-  ];
   const getUserData = async pageNumber => {
-    console.log('pageNumber: ', pageNumber);
     try {
       const data = await axios.get(
-        `https://reqres.in/api/users?page=${pageNumber}`,
+        `${process.env.REACT_APP_CLIENT_API_ENDPOINT}/users`,
+        {
+          params: {
+            page: pageNumber,
+          },
+        },
       );
-      console.log('data: ', data?.data?.data);
-      setTotalPage(data?.data?.total_pages);
-      setUserDataList(data?.data?.data);
+      setTotalPage(data?.data?.totalPages);
+      setUserDataList(data?.data?.results);
     } catch (error) {
       console.log(error);
     }
@@ -60,30 +58,33 @@ export function HomePage() {
                   <>
                     <Col xs={12} md={3} lg={3}>
                       <CardComponent
-                        avatar={avtar1}
-                        firstName="Amit"
-                        lastName="Trivedi"
-                        skills={skills}
-                        portfolio={portfolio}
+                        id={val?.id}
+                        avatar={val?.profileUrl}
+                        firstName={val?.firstName}
+                        lastName={val?.lastName}
+                        skills={val?.skills}
+                        portfolio={val?.portfolio}
                         profilecard={profilecard}
                       />
                     </Col>
                   </>
                 ))}
             </Row>
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="Next"
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              pageCount={totalPage}
-              previousLabel="Previous"
-              activeClassName="activePage"
-              containerClassName="paginationContainer"
-              previousClassName="previousButton"
-              nextClassName="previousButton"
-              pageClassName="nextPageButton"
-            />
+            {totalPage > 1 && (
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="Next"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                pageCount={totalPage}
+                previousLabel="Previous"
+                activeClassName="activePage"
+                containerClassName="paginationContainer"
+                previousClassName="previousButton"
+                nextClassName="previousButton"
+                pageClassName="nextPageButton"
+              />
+            )}
           </div>
         </div>
       </Container>

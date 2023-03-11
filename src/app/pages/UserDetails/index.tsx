@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import w1 from '../../../assets/images/w1.jpg';
-import w2 from '../../../assets/images/w2.jpg';
-import w3 from '../../../assets/images/w3.jpg';
-import w4 from '../../../assets/images/w4.jpg';
-import w5 from '../../../assets/images/w5.jpg';
-import w6 from '../../../assets/images/w6.jpg';
 import timer1 from '../../../assets/images/timer1.png';
 import Illustrator from '../../../assets/images/Illustrator_icon.png';
 import photoshop from '../../../assets/images/photoshop_icon.png';
@@ -15,11 +9,28 @@ import dribbble from '../../../assets/images/dribbble.png';
 import behance from '../../../assets/images/be.png';
 import instagram from '../../../assets/images/instagram.png';
 import mapMarker from '../../../assets/images/map-marker-blue.png';
-import avtar from '../../../assets/images/avtar-hd.png';
 import userbadge from '../../../assets/images/verify.svg';
 import ButtonComponent from 'app/components/Button';
+import axios from 'axios';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
 
 export function UserDetails() {
+  const { id } = useParams();
+  const [userData, setUserData] = useState<any>();
+  const getUserDetails = async () => {
+    try {
+      const data = await axios.get(
+        `${process.env.REACT_APP_CLIENT_API_ENDPOINT}/users/${id}`,
+      );
+      setUserData(data?.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getUserDetails();
+  }, []);
   const categories = [
     'Work',
     'Experience',
@@ -28,8 +39,6 @@ export function UserDetails() {
     'Certification',
     'Interests',
   ];
-  const skill = ['Ui/Ux Designer', 'Produce Designer', 'User Reasearcher'];
-  const [paidUser, setPaidUser] = useState(true);
   return (
     <>
       <Container fluid>
@@ -39,15 +48,16 @@ export function UserDetails() {
               <Col xs={12} md={4} lg={3}>
                 <div className="user-details-profile paid-user bg-white p-4">
                   <div className="user-avtar">
-                    <img src={avtar} alt="" />
+                    <img src={userData?.profileUrl} alt="" />
                   </div>
                   <div className="user-name-badge text-center">
                     <h2>
-                      Ajay Pawriya <img src={userbadge} />
+                      {userData?.firstName + ' ' + userData?.lastName}{' '}
+                      {userData?.isVerified && <img src={userbadge} />}
                     </h2>
                     <p>A problem well understood is a problem half solved</p>
                     <div className="user-tag">
-                      {skill?.map(val => (
+                      {userData?.skills?.map(val => (
                         <ButtonComponent label={val} />
                       ))}
                     </div>
@@ -55,26 +65,22 @@ export function UserDetails() {
                   <div className="text-center getintouch">
                     <ButtonComponent label="Get In Touch" />
                   </div>
-                  <p className="user-bio">
-                    A successful UI UX designer is skilled in user-centered
-                    design, design thinking, visual design, and has a deep
-                    understanding of human-computer interaction.
-                  </p>
+                  <p className="user-bio">{userData?.summary}</p>
                   <div className="user-location">
                     <img src={mapMarker} className="me-1"></img>
-                    <span>Pakistan</span>
+                    <span>{userData?.location}</span>
                   </div>
-                  {paidUser && (
+                  {userData?.isVerified && (
                     <div>
                       <div className="user-social active">
                         <ul>
                           <li>
-                            <a href="">
+                            <a href={userData?.instagramLink}>
                               <img src={instagram} alt="" />
                             </a>
                           </li>
                           <li>
-                            <a href="">
+                            <a href={userData?.behanceLink}>
                               <img src={behance} alt="" />
                             </a>
                           </li>
@@ -90,12 +96,14 @@ export function UserDetails() {
                         <ul>
                           <li>
                             <img src={timer1} />
-                            <span className="me-1">Short Term Project</span>
+                            <span className="me-1">
+                              {userData?.jobPreferences[0]}
+                            </span>
                           </li>
                           <li>
                             <img src={timerstart} />
                             <span className="me-1">
-                              Long Term Project
+                              {userData?.jobPreferences[1]}
                               <small>
                                 Availability: Within the next few weeks
                               </small>
@@ -144,20 +152,15 @@ export function UserDetails() {
                       </div>
                       <div className="user-details-education">
                         <h3>Education</h3>
-                        <div className="user-degree">
-                          <p>
-                            <strong>Bachelors of Arts</strong>
-                          </p>
-                          <p>University of Education, Lahore</p>
-                          <p>(2016-2022)</p>
-                        </div>
-                        <div className="user-degree">
-                          <p>
-                            <strong>Masters in Brand strategy</strong>
-                          </p>
-                          <p>University of Education, Lahore</p>
-                          <p>(2022)</p>
-                        </div>
+                        {userData?.educations?.map(val => (
+                          <div className="user-degree">
+                            <p>
+                              <strong>{val?.courseName}</strong>
+                            </p>
+                            <p>{val?.university + ', ' + val?.country}</p>
+                            <p>({val?.startYear + '-' + val?.endYear})</p>
+                          </div>
+                        ))}
                       </div>
                       <div className="user-details-education">
                         <h3>Skills</h3>
@@ -177,20 +180,15 @@ export function UserDetails() {
                       </div>
                       <div className="user-details-education">
                         <h3>Certifications</h3>
-                        <div className="user-degree">
-                          <p>
-                            <strong>Ui/Ux Certified</strong>
-                          </p>
-                          <p>Coursera, Ux Design course</p>
-                          <p>April, 2020</p>
-                        </div>
-                        <div className="user-degree">
-                          <p>
-                            <strong>Brand Expert by Coursera</strong>
-                          </p>
-                          <p>Branding and Positioning of the product</p>
-                          <p>June, 2020</p>
-                        </div>
+                        {userData?.certifications?.map(val => (
+                          <div className="user-degree">
+                            <p>
+                              <strong>{val?.certificateName}</strong>
+                            </p>
+                            <p>{val?.provider + ',' + val?.course}</p>
+                            <p>{moment(val?.date).format('MMMM-YYYY')}</p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -201,36 +199,13 @@ export function UserDetails() {
                   <ButtonComponent label={val} />
                 ))}
                 <Row className="mt-5">
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w1} alt="" />
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w2} alt="" />
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w3} alt="" />
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w4} alt="" />
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w5} alt="" />
-                    </div>
-                  </Col>
-                  <Col xs={12} md={6} lg={6}>
-                    <div className="user-work">
-                      <img src={w6} alt="" />
-                    </div>
-                  </Col>
+                  {userData?.portfolio?.map(val => (
+                    <Col xs={12} md={6} lg={6}>
+                      <div className="user-work">
+                        <img src={val?.url} alt="" />
+                      </div>
+                    </Col>
+                  ))}
                 </Row>
               </Col>
             </Row>

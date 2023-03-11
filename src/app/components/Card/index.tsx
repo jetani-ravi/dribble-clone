@@ -9,10 +9,11 @@ const CardComponent = ({
   skills,
   portfolio,
   profilecard,
+  id,
 }) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate('/UserDetails');
+    navigate(`/UserDetails/${id}`);
   }
   return (
     <Card className="user-card border-0 ">
@@ -44,10 +45,10 @@ const CardComponent = ({
         <div className="user-project">
           <ul>
             <li>
-              <img src={portfolio[0]} alt="Portfolio" />
+              <img src={portfolio[0]?.url} alt="Portfolio" />
             </li>
             <li>
-              <img src={portfolio[1]} alt="Portfolio" />
+              <img src={portfolio[1]?.url} alt="Portfolio" />
             </li>
           </ul>
         </div>
