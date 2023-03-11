@@ -14,11 +14,11 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
+        titleTemplate="%s - dribble web portal"
+        defaultTitle="dribble web portal"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="A React Boilerplate application" />
+        <meta name="description" content="A dribble web portal application" />
       </Helmet>
       <Header />
       <Routes>

@@ -9,8 +9,7 @@ import ProfileAvtar from '../../../assets/images/avtar.png';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Button, Dropdown, Form } from 'react-bootstrap';
+import { Dropdown, Form } from 'react-bootstrap';
 import { FiSearch, FiUser } from 'react-icons/fi';
 
 export function Header() {
@@ -18,7 +17,7 @@ export function Header() {
     <>
       <Navbar className="main-header" expand="lg">
         <Container fluid className="">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="/">
             <img className="Logo" src={logo} alt="clockup logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

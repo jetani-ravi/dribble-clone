@@ -152,13 +152,13 @@ export function UserDetails() {
                       </div>
                       <div className="user-details-education">
                         <h3>Education</h3>
-                        {userData?.educations?.map(val => (
+                        {userData?.educations?.map(data => (
                           <div className="user-degree">
                             <p>
-                              <strong>{val?.courseName}</strong>
+                              <strong>{data?.courseName}</strong>
                             </p>
-                            <p>{val?.university + ', ' + val?.country}</p>
-                            <p>({val?.startYear + '-' + val?.endYear})</p>
+                            <p>{data?.university + ', ' + data?.country}</p>
+                            <p>({data?.startYear + '-' + data?.endYear})</p>
                           </div>
                         ))}
                       </div>

@@ -23,12 +23,5 @@ yarn-error.log*
 
 # env
 .env.development.local
-.env.test.local
 .env.production.local
 .env
-
-# boilerplate internals
-generated-cra-app
-.cra-template-rb
-template
-.eslintcache

@@ -18,7 +18,7 @@ The environment variables can be found and modified in the `.env` file.
 
 ```bash
 # Client api endpoint
-REACT_APP_CLIENT_API_ENDPOINT=http://localhost:3000/v1
+REACT_APP_CLIENT_API_ENDPOINT=http://localhost:3001/v1
 
 ```
 ## Commands

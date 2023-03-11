@@ -1,13 +1,20 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const ButtonComponent = ({ label }) => {
+interface IButtonInterface {
+  label: string;
+  value?: string;
+  handleOnClick?: (event: any) => any;
+}
+const ButtonComponent = (buttonProps: IButtonInterface) => {
   return (
     <Button
       type="button"
-      className={`button ${label === 'All' ? 'active' : ''}`}
+      onClick={buttonProps.handleOnClick}
+      value={buttonProps.value}
+      className={`button ${buttonProps.label === 'All' ? 'active' : ''}`}
     >
-      {label}
+      {buttonProps.label}
     </Button>
   );
 };
