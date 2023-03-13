@@ -76,11 +76,13 @@ export function HomePage() {
   };
 
   useEffect(() => {
+    const defaultFilter = 'All';
     getSkillCategories();
     const queryParams: IUserQueryParams = {
       page: 1,
     };
     getUserData(queryParams);
+    setSkillFilter(defaultFilter);
   }, []);
   return (
     <>
@@ -91,18 +93,19 @@ export function HomePage() {
               <ButtonComponent
                 label={category}
                 value={category}
-                key={index}
+                className={category === skillFilter ? 'active' : ''}
+                key={String(index)}
                 handleOnClick={onFilterChange}
               />
             ))}
             <Row className="mt-5">
               {userDataList?.length > 0 &&
-                userDataList?.map(user => (
+                userDataList?.map((user,index) => (
                   <>
                     <Col xs={12} md={3} lg={3}>
                       <CardComponent
                         id={user?.id}
-                        key={user?.id}
+                        key={`user_card_${user?.id}`}
                         avatar={user?.profileUrl}
                         firstName={user?.firstName}
                         lastName={user?.lastName}

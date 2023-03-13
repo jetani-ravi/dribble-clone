@@ -26,7 +26,7 @@ const CardComponent = ({
           <div className="profile-img">
             <img
               src={avatar}
-              key={id}
+              key={`card_img_${id}`}
               alt="User avatar"
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
@@ -41,7 +41,7 @@ const CardComponent = ({
               variant="link"
               className="user-profile-view"
               onClick={handleClick}
-              key={id}
+              key={`view_profile_btn_${id}`}
             >
               <img src={profilecard} alt="profile-card" className="me-1" />
               View Profile

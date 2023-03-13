@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 interface IButtonInterface {
   label: string;
   value?: string;
+  className?: string;
   handleOnClick?: (event: any) => any;
 }
 const ButtonComponent = (buttonProps: IButtonInterface) => {
@@ -12,7 +13,7 @@ const ButtonComponent = (buttonProps: IButtonInterface) => {
       type="button"
       onClick={buttonProps.handleOnClick}
       value={buttonProps.value}
-      className={`button ${buttonProps.label === 'All' ? 'active' : ''}`}
+      className={`button ${buttonProps.className}`}
     >
       {buttonProps.label}
     </Button>

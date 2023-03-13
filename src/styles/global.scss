@@ -1,11 +1,8 @@
 @font-face {
   font-family: 'helvetica';
-  src: url('https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf')
-      format('woff'),
-    url('https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf')
-      format('opentype'),
-    url('https://candyfonts.com/wp-data/2018/10/26/11538/HELR45W.ttf')
-      format('truetype');
+  src: ('./assets/fonts/HELR45W.ttf') format('woff'),
+    ('./assets/fonts/HELR45W.ttf') format('opentype'),
+    ('./assets/fonts/HELR45W.ttf') format('truetype');
 }
 
 :root {
@@ -318,14 +315,14 @@
       display: flex;
       flex-wrap: wrap;
       list-style: none;
-      button{
+      button {
         box-shadow: 0px 2px 5px 0px rgb(0 0 0 / 21%);
         margin: 5px;
       }
     }
   }
   .getintouch {
-    button{
+    button {
       border-radius: 100px;
       background: linear-gradient(180deg, #2e6ecc 0%, #0b6af7 100%);
       color: var(--white);
@@ -401,7 +398,7 @@
     margin-top: 20px;
     padding: 25px;
     .send-offer {
-      button{
+      button {
         color: #ffffff;
         width: 100%;
         margin-top: 20px;
@@ -474,32 +471,32 @@
     }
   }
   .user-skills {
-   ul{
-    margin: 0;
-    list-style: none;
-    display: flex;
-    padding: 0;
-    li{
-      margin-right: 5px;
+    ul {
+      margin: 0;
+      list-style: none;
+      display: flex;
+      padding: 0;
+      li {
+        margin-right: 5px;
+      }
     }
-   }
   }
 }
 
-.activePage{
-  a{
+.activePage {
+  a {
     background: linear-gradient(180deg, #2e6ecc 0%, #0b6af7 100%);
     color: var(--white) !important;
   }
 }
 
-.paginationContainer{
+.paginationContainer {
   margin: 0;
   display: flex;
   list-style: none;
   justify-content: center;
-  li{
-    a{
+  li {
+    a {
       padding: 20px;
       border-radius: 8px;
       text-align: center;
@@ -507,8 +504,8 @@
     }
   }
 }
-.previousButton{
-  a{
+.previousButton {
+  a {
     color: black;
     text-decoration: none;
     border-radius: 8px;
@@ -518,8 +515,8 @@
     border-radius: 8px;
     color: #344054;
   }
-  &:hover{
-    a{
+  &:hover {
+    a {
       color: #ffffff !important;
       background: linear-gradient(180deg, #2e6ecc 0%, #0b6af7 100%);
       color: var(--white);
@@ -527,18 +524,17 @@
     }
   }
 }
-.nextPageButton{
-  &:hover{
+.nextPageButton {
+  &:hover {
     a {
-        color: #ffffff !important;
-        background: linear-gradient(180deg, #2e6ecc 0%, #0b6af7 100%);
-        color: var(--white);
-        border-color: var(--blue);
-      }
-    
+      color: #ffffff !important;
+      background: linear-gradient(180deg, #2e6ecc 0%, #0b6af7 100%);
+      color: var(--white);
+      border-color: var(--blue);
+    }
   }
 }
-.button{
+.button {
   font-size: 15px;
   color: #5e5e5e;
   background-color: #ffffff;
