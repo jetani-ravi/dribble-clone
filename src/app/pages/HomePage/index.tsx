@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import profilecard from '../../../assets/images/profile-card.svg';
+import { profilecard } from '../../constant/images';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import CardComponent from 'app/components/Card';
@@ -88,7 +88,7 @@ export function HomePage() {
     <>
       <Container fluid>
         <div className="page-content">
-          <div className="gray-bg rounded-3 p-5">
+          <div className="gray-bg rounded-3 p-xxl-5 p-xl-4 p-lg-4 p-md-4 p-sm-4 p-3">
             {skillCategory?.map((category, index) => (
               <ButtonComponent
                 label={category}
@@ -98,11 +98,11 @@ export function HomePage() {
                 handleOnClick={onFilterChange}
               />
             ))}
-            <Row className="mt-5">
+            <Row className="mt-xxl-5 mt-md-2 mt-lg-3 mt-xl-3 mt-3">
               {userDataList?.length > 0 &&
-                userDataList?.map((user,index) => (
+                userDataList?.map((user, index) => (
                   <>
-                    <Col xs={12} md={3} lg={3}>
+                    <Col xs={12} md={6} lg={6} xl={4} xxl={3}>
                       <CardComponent
                         id={user?.id}
                         key={`user_card_${user?.id}`}
